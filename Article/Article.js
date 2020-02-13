@@ -85,8 +85,58 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Life Lessons',
+    date: 'Feb 12st, 2020',
+    firstParagraph: `One of the hardest things about improving your life is remembering to practice what you've learned in a moment of temptation, frustration, or hardship. Anyone can follow a strategy as they read about it, but remembering to stick with it in the real world is tough. `,
+
+    secondParagraph: `Stories help with that. An engaging story sticks with you in a way that a research finding often can't. While JamesClear.com promotes science-backed ideas, we don't shun stories and lessons based on real life.`,
+
+    thirdParagraph: `This page collects life lessons from my own life as well as from the lives of artists, creators, and innovators. Articles grapple with concepts like marriage, gratitude, and work-life balance.`
   }
 ];
+
+function createData (obj) {
+  const article = document.createElement('div');
+  const title = document.createElement('h2');
+  const date = document.createElement('p');
+  const par1 = document.createElement('p');
+  const par2 = document.createElement('p');
+  const par3 = document.createElement('p'); 
+  const button = document.createElement('span');
+
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(par1);
+  article.appendChild(par2);
+  article.appendChild(par3);
+  article.appendChild(button);
+
+  article.classList.add('article');
+  date.classList.add('date');
+  button.classList.add('expandButton');
+
+  title.textContent = obj.title;
+  date.textContent = obj.date;
+  par1.textContent = obj.firstParagraph;
+  par2.textContent = obj.secondParagraph;
+  par3.textContent = obj.thirdParagraph;
+  button.textContent = 'expand';
+
+  button.addEventListener('click', event => {
+    console.log('click', event.target);
+    article.classList.toggle('article-open');
+  });
+
+  return article;
+}
+
+const container = document.querySelector('.articles');
+
+data.map(el => {
+  container.appendChild(createData(el));
+})
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
@@ -107,7 +157,7 @@ const data = [
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
